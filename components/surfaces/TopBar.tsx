@@ -14,59 +14,71 @@ export const TopBar: React.FC = () => {
       sx={{
         width: "100%",
         height: "100%",
-        display: "flex",
-        justifyContent: "space-between",
+
         backgroundColor: "#0F3460",
       }}
     >
       <Box
-        id="left"
         sx={{
+          margin: "0 auto",
+          boxSizing: "border-box",
+          maxWidth: "1280px",
           display: "flex",
-          gap: 5,
+          justifyContent: "space-between",
         }}
       >
         <Box
+          id="left"
           sx={{
-            height: "100%",
             display: "flex",
-            gap: 1,
-            alignItems: "center",
+            gap: 5,
           }}
         >
-          <LocalPhoneOutlinedIcon sx={{ color: "#fff", fontSize: 20 }} />
-          <Typography variant="caption" gutterBottom>
-            +88012 3456 7894
-          </Typography>
+          <Box
+            sx={{
+              height: "100%",
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+            }}
+          >
+            <LocalPhoneOutlinedIcon sx={{ color: "#fff", fontSize: 20 }} />
+            <Typography variant="caption" gutterBottom>
+              +88012 3456 7894
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              height: "100%",
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+            }}
+          >
+            <EmailOutlinedIcon sx={{ color: "#fff", fontSize: 20 }} />
+            <Typography variant="caption" gutterBottom>
+              support@ui-lib.com
+            </Typography>
+          </Box>
         </Box>
-        <Box
-          sx={{
-            height: "100%",
-            display: "flex",
-            gap: 1,
-            alignItems: "center",
-          }}
-        >
-          <EmailOutlinedIcon sx={{ color: "#fff", fontSize: 20 }} />
-          <Typography variant="caption" gutterBottom>
-            support@ui-lib.com
-          </Typography>
-        </Box>
-      </Box>
 
-      <Box id="right" sx={{ display: "flex", gap: 2.1, alignItems: "center" }}>
-        <Link href="#" underline="none">
-          Theme FAQ"s
-        </Link>
-        <Link href="#" underline="none">
-          Need Help?
-        </Link>
-        <ButtonMenu menuItem={menuItem1} style={{ color: "#fff" }}>
-          EN
-        </ButtonMenu>
-        <ButtonMenu menuItem={menuItem2} style={{ color: "#fff" }}>
-          USD
-        </ButtonMenu>
+        <Box
+          id="right"
+          sx={{ display: "flex", gap: 2.1, alignItems: "center" }}
+        >
+          <Link href="#" underline="none">
+            Theme FAQ"s
+          </Link>
+          <Link href="#" underline="none">
+            Need Help?
+          </Link>
+          <ButtonMenu menuItem={menuItem1} style={{ color: "#fff" }}>
+            EN
+          </ButtonMenu>
+          <ButtonMenu menuItem={menuItem2} style={{ color: "#fff" }}>
+            USD
+          </ButtonMenu>
+        </Box>
       </Box>
     </Box>
   );

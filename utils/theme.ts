@@ -5,6 +5,7 @@ const theme = createTheme({
     common: {},
     primary: {
       main: "#E3364E",
+      light: "#D23F57",
     },
     secondary: {
       main: "#0F3460",
@@ -37,14 +38,6 @@ const theme = createTheme({
           color: "#fff",
           fontSize: 12,
           "&:hover": { color: "#d16446" },
-        },
-      },
-    },
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          fontSize: 12,
-          color: "#fff",
         },
       },
     },
