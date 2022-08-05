@@ -6,12 +6,16 @@ interface CustomBoxProps {
   width?: string;
   height?: string;
   boxTitle: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 export const CustomBox: React.FC<CustomBoxProps> = (props) => {
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "space-between" }}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        margin: "54px 0 24px 0",
+      }}
       width={props.width}
       height={props.height}
     >

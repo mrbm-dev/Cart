@@ -8,11 +8,6 @@ import { FeaturedBrandsCard } from "../surfaces/FeaturedBrandsCard";
 export const FeaturedBrands: React.FC = () => {
   return (
     <Box>
-      <CustomBox
-        icon={<StarOutlinedIcon sx={{ color: "#fa0", fontSize: "26px" }} />}
-        boxTitle="Featured Brands"
-      />
-
       <CustomCard
         width="600px"
         height="240px"

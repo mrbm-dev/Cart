@@ -1,9 +1,16 @@
 import { Box, Paper, Rating, Typography } from "@mui/material";
-import Image from "next/image";
 import React, { useState } from "react";
+import { ImageCustomHover } from "../layout/ImageCustomHover";
 
-export const TopRatingsCard: React.FC = () => {
-  const [value, setValue] = useState<number | null>(4);
+interface TopRatingsCardProps {
+  srcImage: string;
+  name: string;
+  price: number;
+  star: number;
+  numberPeople: number;
+}
+export const TopRatingsCard: React.FC<TopRatingsCardProps> = (props) => {
+  const [value, setValue] = useState<number | null>(props.star);
 
   return (
     <Box
@@ -14,38 +21,10 @@ export const TopRatingsCard: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         gap: "10px",
-        padding: "10px",
         margin: "8px",
       }}
     >
-      <Box
-        sx={{
-          width: "118px",
-          height: "118px",
-          display: "flex",
-          zIndex: 10,
-          position: "relative",
-          alignItems: "center",
-        }}
-      >
-        <Image
-          layout="fill"
-          src="/image/camera.png"
-          style={{ borderRadius: "10px" }}
-        />
-        <Box
-          sx={{
-            zIndex: 20,
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            borderRadius: "10px",
-            "&:hover": {
-              backgroundColor: "rgba(0, 0, 0, 0.25)",
-            },
-          }}
-        />
-      </Box>
+      <ImageCustomHover width="118px" height="118px" src={props.srcImage} />
       <Box
         sx={{
           display: "flex",
@@ -58,17 +37,17 @@ export const TopRatingsCard: React.FC = () => {
         <Box sx={{ display: "flex", gap: "3px" }}>
           <Rating readOnly value={value} size="small" />
           <Typography sx={{ fontSize: "12px", fontWeight: 600 }}>
-            (49)
+            ({props.numberPeople})
           </Typography>
         </Box>
         <Typography variant="h4" sx={{ fontSize: "14px", fontWeight: 600 }}>
-          Camera
+          {props.name}
         </Typography>
         <Typography
           variant="h4"
           sx={{ fontSize: "14px", fontWeight: 600, color: "#D23F57" }}
         >
-          $3.300
+          ${props.price}
         </Typography>
       </Box>
     </Box>

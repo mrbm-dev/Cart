@@ -4,7 +4,7 @@ import React from "react";
 interface CustomCardProps {
   width: string;
   height: string;
-  children: JSX.Element;
+  children: React.ReactNode;
   customSx?: SxProps;
 }
 export const CustomCard: React.FC<CustomCardProps> = (props) => {

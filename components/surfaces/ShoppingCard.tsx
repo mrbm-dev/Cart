@@ -1,5 +1,12 @@
 import React from "react";
-import { Avatar, Box, Divider, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  styled,
+  Typography,
+} from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import Image from "next/image";
@@ -7,6 +14,12 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import { ButtonMenu } from "../inputs/ButtonMenu";
 
 export const ShoppingCard: React.FC = () => {
+  const CustomButton = styled(Button)({
+    borderRadius: "50%",
+    width: "32px",
+    height: "32px",
+    minWidth: 0,
+  });
   return (
     <>
       <Box
@@ -40,13 +53,13 @@ export const ShoppingCard: React.FC = () => {
               padding: "12px",
             }}
           >
-            <Avatar>
+            <CustomButton variant="outlined">
               <AddOutlinedIcon />
-            </Avatar>
+            </CustomButton>
             <Typography sx={{ color: "#000", fontSize: "15px" }}>1</Typography>
-            <Avatar>
+            <CustomButton variant="outlined" disabled>
               <RemoveOutlinedIcon />
-            </Avatar>
+            </CustomButton>
           </Box>
           <Box>
             <Image src="/image/car.png" width={80} height={80} />

@@ -1,8 +1,16 @@
 import { Box, Paper, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
+import { ImageCustomHover } from "../layout/ImageCustomHover";
+import { CustomCard } from "./CustomCard";
 
-export const TopCategoriesCarouselCard: React.FC = () => {
+interface TopCategoriesCarouselCardProps {
+  srcImage: string;
+  category: string;
+}
+export const TopCategoriesCarouselCard: React.FC<
+  TopCategoriesCarouselCardProps
+> = (props) => {
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = () => {
     setIsHovering(true);
@@ -13,7 +21,58 @@ export const TopCategoriesCarouselCard: React.FC = () => {
   };
 
   return (
-    <Box>
+    <>
+      <CustomCard width="354px" height="152px">
+        <ImageCustomHover width="321px" height="110px" src={props.srcImage} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            bottom: "115px",
+            position: "relative",
+            zIndex: 20,
+            padding: "12px",
+          }}
+        >
+          <Box
+            sx={{
+              width: "88px",
+              height: "24px",
+              backgroundColor: "#0F3460",
+              borderRadius: "30px",
+              padding: "3px 8px",
+              color: "#fff",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "10px",
+                fontWeight: 600,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {props.category}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              width: "126px",
+              height: "24px",
+              backgroundColor: "rgba(0, 0, 0, 0.08)",
+              borderRadius: "30px",
+              padding: "3px 8px",
+              color: "#2B3445",
+            }}
+          >
+            <Typography sx={{ fontSize: "10px", fontWeight: 600 }}>
+              3K orders this week
+            </Typography>
+          </Box>
+        </Box>
+      </CustomCard>
+
+      {/* <Box>
       <Box
         sx={{
           margin: "20px",
@@ -29,7 +88,7 @@ export const TopCategoriesCarouselCard: React.FC = () => {
             display: "flex",
             justifyContent: "space-between",
             position: "relative",
-            top: "15%",
+            top: " 15%",
             zIndex: 20,
             padding: "0 18px",
           }}
@@ -91,6 +150,7 @@ export const TopCategoriesCarouselCard: React.FC = () => {
           />
         </Box>
       </Box>
-    </Box>
+    </Box> */}
+    </>
   );
 };

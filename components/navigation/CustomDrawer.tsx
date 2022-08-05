@@ -3,15 +3,14 @@ import { Box, Divider, Drawer, Typography } from "@mui/material";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { ShoppingCard } from "../surfaces/ShoppingCard";
 
-export const CustomDrawer: React.FC = () => {
-  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+interface CustomDrawerProps {
+  openDrawer: boolean;
+  onClose: () => void;
+}
+export const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
   return (
     <>
-      <Drawer
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-        anchor="right"
-      >
+      <Drawer open={props.openDrawer} onClose={props.onClose} anchor="right">
         <Box
           sx={{
             height: "74px",
