@@ -10,22 +10,50 @@ import {
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import Image from "next/image";
-import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
-import { ButtonMenu } from "../inputs/ButtonMenu";
+import { useDispatch } from "react-redux";
+import {
+  addToCart,
+  cartActions,
+  removeItemFromCart,
+} from "../../store/slice/cart-slice";
 
-export const ShoppingCard: React.FC = () => {
+interface ShoppingCardProps {
+  id: number;
+  name: string;
+  srcImage: string;
+  price: number;
+  quantity: number;
+  totalPrice: number;
+}
+export const ShoppingCard: React.FC<ShoppingCardProps> = (props) => {
+  const { id } = props;
   const CustomButton = styled(Button)({
     borderRadius: "50%",
     width: "32px",
     height: "32px",
     minWidth: 0,
   });
+  const dispatch = useDispatch();
+  const addItemHandler = () => {
+    dispatch(
+      addToCart({
+        id,
+        price: props.price,
+        totalPrice: props.totalPrice,
+        name: props.name,
+        srcImage: props.srcImage,
+      })
+    );
+  };
+  const removeItemHandler = () => {
+    dispatch(removeItemFromCart(id));
+  };
   return (
     <>
       <Box
         id="1"
         sx={{
-          height: "100%",
+          height: "125px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -35,12 +63,11 @@ export const ShoppingCard: React.FC = () => {
         <Box
           id="2"
           sx={{
-            width: "100%",
+            width: "380px",
             display: "flex",
             alignItems: "center",
             gap: "10px",
             justifyContent: "space-between",
-            // borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
           }}
         >
           <Box
@@ -53,69 +80,39 @@ export const ShoppingCard: React.FC = () => {
               padding: "12px",
             }}
           >
-            <CustomButton variant="outlined">
+            <CustomButton variant="outlined" onClick={addItemHandler}>
               <AddOutlinedIcon />
             </CustomButton>
-            <Typography sx={{ color: "#000", fontSize: "15px" }}>1</Typography>
-            <CustomButton variant="outlined" disabled>
+            <Typography sx={{ color: "#000", fontSize: "15px" }}>
+              {props.quantity}
+            </Typography>
+            <CustomButton variant="outlined" onClick={removeItemHandler}>
               <RemoveOutlinedIcon />
             </CustomButton>
           </Box>
           <Box>
-            <Image src="/image/car.png" width={80} height={80} />
+            <Image src={props.srcImage} width={80} height={80} />
           </Box>
           <Box sx={{ display: "flex", gap: "80px", alignItems: "center" }}>
             <Box>
-              <Typography variant="h5" sx={{ color: "#000" }}>
-                Ford 2019
+              <Typography
+                variant="h5"
+                sx={{ color: "#000", fontSize: "14px", fontWeight: 600 }}
+              >
+                {props.name}
               </Typography>
-              <Typography sx={{ color: "#7D879C", fontSize: "9.5px" }}>
-                $250.00 x 1
+              <Typography sx={{ color: "#7D879C", fontSize: "10px" }}>
+                ${props.price} x {props.quantity}
               </Typography>
               <Typography sx={{ color: "#Fa0000", fontSize: "12px" }}>
-                $250.00
+                ${props.totalPrice}
               </Typography>
             </Box>
-            <Box>
-              <Avatar
-                sx={{
-                  backgroundColor: "#fff",
-                  width: "24px",
-                  height: "24px",
-                  "&:hover": { backgroundColor: "#F3F5F9" },
-                }}
-              >
-                <ClearOutlinedIcon sx={{ fontSize: "20px" }} />
-              </Avatar>
-            </Box>
+            <Box></Box>
           </Box>
-          <Divider />
-        </Box>
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "14px",
-            padding: "10px",
-          }}
-        >
-          <ButtonMenu
-            variant="contained"
-            showIconButton={false}
-            style={{ width: "100%", textTransform: "none" }}
-          >
-            Checkout Now ($750.00)
-          </ButtonMenu>
-          <ButtonMenu
-            variant="outlined"
-            showIconButton={false}
-            style={{ width: "100%", textTransform: "none" }}
-          >
-            View Cart
-          </ButtonMenu>
         </Box>
       </Box>
+      <Divider />
     </>
   );
 };

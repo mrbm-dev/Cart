@@ -7,6 +7,8 @@ interface ButtonMenuProps {
   children?: any;
   style?: SxProps;
   showIconButton?: boolean;
+  onMouseOver?: () => void;
+  onClick?: () => void;
   variant?: "text" | "outlined" | "contained" | undefined;
 }
 export const ButtonMenu: React.FC<ButtonMenuProps> = (props) => {
@@ -27,6 +29,7 @@ export const ButtonMenu: React.FC<ButtonMenuProps> = (props) => {
         endIcon={props.showIconButton && <KeyboardArrowDownOutlinedIcon />}
         variant={props.variant}
         sx={props.style}
+        onMouseOver={props.onMouseOver}
       >
         {props.children}
       </Button>

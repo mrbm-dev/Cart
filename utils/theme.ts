@@ -51,9 +51,8 @@ const theme = createTheme({
     MuiToolbar: {
       styleOverrides: {
         root: {
-          paddingLeft: 0,
-          paddingRight: 0,
-          width: "inherit",
+          paddingLeft: "5px",
+          paddingRight: "5px",
         },
       },
     },

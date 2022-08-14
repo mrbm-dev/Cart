@@ -9,9 +9,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { FlashDealsCarouselCard } from "../surfaces/FlashDealsCarouselCard";
 import { FlashDealsData } from "../../utils/data";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../store/slice/cart-slice";
 
 SwiperCore.use([Virtual, Navigation, Pagination]);
 export const FlashDealsCarousel: React.FC = () => {
+  const cart = useSelector(selectCart);
+  const quantity = cart.items;
   return (
     <Box>
       <CustomBox
@@ -32,12 +36,16 @@ export const FlashDealsCarousel: React.FC = () => {
             <SwiperSlide>
               <FlashDealsCarouselCard
                 key={item.id}
+                id={item.id}
                 srcImage={item.imageAddress}
                 name={item.name}
                 star={item.star}
                 price={item.price}
                 discount={item.discount}
                 off={item.off}
+                quantity={quantity.map((item1: any) =>
+                  item1.id === item.id ? item1.quantity : null
+                )}
               />
             </SwiperSlide>
           ))}

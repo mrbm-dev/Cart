@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   Button,
-  Paper,
   Rating,
   styled,
   SxProps,
@@ -11,6 +10,13 @@ import {
 } from "@mui/material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import {
+  addToCart,
+  cartActions,
+  CartItem,
+  removeItemFromCart,
+} from "../../store/slice/cart-slice";
 
 export const CounterButton = styled(Button)({
   minWidth: "28px",
@@ -24,18 +30,37 @@ export const CounterButton = styled(Button)({
 });
 
 interface FlashDealsCarouselCardProps {
+  id: number;
   srcImage: string;
   star: number;
   name: string;
   price: number;
   discount: number;
   off: number;
+  quantity: number;
   customSx?: SxProps;
 }
 export const FlashDealsCarouselCard: React.FC<FlashDealsCarouselCardProps> = (
   props
 ) => {
   const [value, setValue] = useState<number | null>(props.star);
+  const dispatch = useDispatch();
+  const [counter, setCounter] = useState<number>(0);
+  const addToCartHandler = () => {
+    dispatch(
+      addToCart({
+        id: props.id,
+        name: props.name,
+        price: props.price,
+        srcImage: props.srcImage,
+      })
+    );
+
+    setCounter(counter + 1);
+  };
+  const removeItemHandler = () => {
+    dispatch(removeItemFromCart(props.id));
+  };
   return (
     <Box
       sx={{
@@ -135,9 +160,13 @@ export const FlashDealsCarouselCard: React.FC<FlashDealsCarouselCardProps> = (
             flexDirection: "column",
           }}
         >
-          <CounterButton variant="outlined">-</CounterButton>
-          <Typography sx={{ fontSize: "14px" }}>1</Typography>
-          <CounterButton variant="outlined">+</CounterButton>
+          <CounterButton variant="outlined" onClick={removeItemHandler}>
+            -
+          </CounterButton>
+          <Typography sx={{ fontSize: "14px" }}>{props.quantity}</Typography>
+          <CounterButton variant="outlined" onClick={addToCartHandler}>
+            +
+          </CounterButton>
         </Box>
       </Box>
     </Box>

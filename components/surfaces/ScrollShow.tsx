@@ -13,7 +13,6 @@ export const ScrollShow: React.FC<ScrollShowProps> = (props) => {
     threshold: props.threshold,
     target: window ? window() : undefined,
   });
-
   return (
     <Slide appear={false} direction="down" in={trigger}>
       {children}

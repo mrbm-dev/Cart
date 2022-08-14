@@ -38,6 +38,7 @@ export const Cars: React.FC = () => {
                 },
               }}
               key={item.id}
+              id={item.id}
               name={item.name}
               discount={item.discount}
               off={item.off}

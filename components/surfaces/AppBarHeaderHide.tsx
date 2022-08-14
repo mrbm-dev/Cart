@@ -20,9 +20,14 @@ import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import { TopBar } from "./TopBar";
 import { CustomDrawer } from "../navigation/CustomDrawer";
 import { ScrollHide } from "./ScrollHide";
+import { useSelector } from "react-redux";
+import { MegaMenu } from "../navigation/MegaMenu";
+import { selectCart } from "../../store/slice/cart-slice";
 
 export const AppBarHeaderHide: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const cart = useSelector(selectCart);
+  const cartQuantity = cart.totalQuantity;
   const menuItem = [
     "All Categories",
     "Mobile",
@@ -41,8 +46,11 @@ export const AppBarHeaderHide: React.FC = () => {
           zIndex: 100,
         }}
       >
-        <Toolbar>
-          <Box>
+        <Toolbar
+          id="toolbar"
+          sx={{ ["@media (min-width:600px)"]: { padding: 0 } }}
+        >
+          <Box sx={{ width: "100%" }}>
             <Box width="100%">
               <TopBar />
             </Box>
@@ -120,7 +128,7 @@ export const AppBarHeaderHide: React.FC = () => {
                   <Avatar alt="user image">
                     <PersonOutlineOutlinedIcon />
                   </Avatar>
-                  <Badge badgeContent={3} color="primary">
+                  <Badge badgeContent={cartQuantity} color="primary">
                     <Avatar
                       alt="shopping image"
                       onClick={() => setOpenDrawer(true)}
@@ -172,7 +180,7 @@ export const AppBarHeaderHide: React.FC = () => {
                 </Box>
                 <Box sx={{ display: "flex", gap: 1 }}>
                   <ButtonMenu>Home</ButtonMenu>
-                  <ButtonMenu>Mega Menu</ButtonMenu>
+                  <MegaMenu />
                   <ButtonMenu>Full Screen Menu</ButtonMenu>
                   <ButtonMenu>Pages</ButtonMenu>
                   <ButtonMenu>User Account</ButtonMenu>
