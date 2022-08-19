@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Divider, Drawer, Typography } from "@mui/material";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { ShoppingCard } from "../surfaces/ShoppingCard";
@@ -14,8 +14,6 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
   const cart = useSelector(selectCart);
   const cartQuantity = cart.totalQuantity;
   const cartItem = cart.items;
-  let total;
-  const [totalPrice, setTotalPrice] = useState(total);
   return (
     <>
       <Drawer
@@ -53,7 +51,6 @@ export const CustomDrawer: React.FC<CustomDrawerProps> = (props) => {
         >
           <Box>
             {cartItem.map((item: any) => {
-              // setTotalPrice(totalPrice + item.totalPrice);
               return (
                 <ShoppingCard
                   id={item.id}

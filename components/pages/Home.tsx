@@ -9,17 +9,16 @@ import { NewArrivals } from "../data-display/NewArrivals";
 import { BigDiscounts } from "../data-display/BigDiscounts";
 import { Cars } from "../data-display/Cars";
 import { useDispatch } from "react-redux";
-import { CartItem, setCarts } from "../../store/slice/cart-slice";
+import { addToCart, CartItem, setCarts } from "../../store/slice/cart-slice";
 
 export const HomePage: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    let carts: { data: CartItem[] } | null | undefined = JSON.parse(
-      localStorage.getItem("cart")
+    const carts: CartItem[] = JSON.parse(
+      localStorage.getItem("cart") as string
     );
-    // console.log(carts.data);
     if (carts !== null && carts) {
-      dispatch(setCarts(carts.data));
+      dispatch(setCarts(carts));
     }
   }, []);
 

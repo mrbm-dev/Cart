@@ -16,6 +16,7 @@ SwiperCore.use([Virtual, Navigation, Pagination]);
 export const FlashDealsCarousel: React.FC = () => {
   const cart = useSelector(selectCart);
   const quantity = cart.items;
+
   return (
     <Box>
       <CustomBox
@@ -37,10 +38,11 @@ export const FlashDealsCarousel: React.FC = () => {
               <FlashDealsCarouselCard
                 key={item.id}
                 id={item.id}
-                srcImage={item.imageAddress}
                 name={item.name}
-                star={item.star}
                 price={item.price}
+                totalPrice={item.price}
+                srcImage={item.imageAddress}
+                star={item.star}
                 discount={item.discount}
                 off={item.off}
                 quantity={quantity.map((item1: any) =>
@@ -54,3 +56,9 @@ export const FlashDealsCarousel: React.FC = () => {
     </Box>
   );
 };
+
+/*
+quantity.map((item1: any) =>
+                  item1.id === item.id ? item1.quantity : 0
+                )
+*/

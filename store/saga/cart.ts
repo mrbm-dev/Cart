@@ -5,6 +5,7 @@ import { addToCart, CartItem, removeItemFromCart } from "../slice/cart-slice";
 
 function* addToCartHandler(action: PayloadAction<CartItem>): Generator {
   yield call(addItemLocalStorage, action.payload);
+  console.log(action.payload);
 }
 function* removeFromCartHandler(action: PayloadAction<number>): Generator {
   yield call(removeItemLocalStorage, action.payload);
@@ -12,5 +13,5 @@ function* removeFromCartHandler(action: PayloadAction<number>): Generator {
 
 export const cartSaga = [
   takeLatest(addToCart, addToCartHandler),
-  takeLatest(removeItemFromCart, removeFromCartHandler),
+  takeLatest(removeItemFromCart.type, removeFromCartHandler),
 ];

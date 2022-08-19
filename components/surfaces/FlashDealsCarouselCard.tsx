@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -13,7 +13,6 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import {
   addToCart,
-  cartActions,
   CartItem,
   removeItemFromCart,
 } from "../../store/slice/cart-slice";
@@ -38,6 +37,7 @@ interface FlashDealsCarouselCardProps {
   discount: number;
   off: number;
   quantity: number;
+  totalPrice: number;
   customSx?: SxProps;
 }
 export const FlashDealsCarouselCard: React.FC<FlashDealsCarouselCardProps> = (
@@ -45,7 +45,7 @@ export const FlashDealsCarouselCard: React.FC<FlashDealsCarouselCardProps> = (
 ) => {
   const [value, setValue] = useState<number | null>(props.star);
   const dispatch = useDispatch();
-  const [counter, setCounter] = useState<number>(0);
+
   const addToCartHandler = () => {
     dispatch(
       addToCart({
@@ -53,11 +53,12 @@ export const FlashDealsCarouselCard: React.FC<FlashDealsCarouselCardProps> = (
         name: props.name,
         price: props.price,
         srcImage: props.srcImage,
+        quantity: props.quantity,
+        totalPrice: props.totalPrice,
       })
     );
-
-    setCounter(counter + 1);
   };
+
   const removeItemHandler = () => {
     dispatch(removeItemFromCart(props.id));
   };
@@ -164,7 +165,7 @@ export const FlashDealsCarouselCard: React.FC<FlashDealsCarouselCardProps> = (
             -
           </CounterButton>
           <Typography sx={{ fontSize: "14px" }}>{props.quantity}</Typography>
-          <CounterButton variant="outlined" onClick={addToCartHandler}>
+          <CounterButton variant="outlined" onClick={() => addToCartHandler()}>
             +
           </CounterButton>
         </Box>
